@@ -14,3 +14,4 @@ Auto-generates 5 truths in a podcast form by scraping news feeds of your choice,
 
 ## Execution
 1. `dotenv run python app.py`
+1. `start.sh` runs in a loop
