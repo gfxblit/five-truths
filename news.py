@@ -30,6 +30,7 @@ def get_recent_articles(start_date, recent_count=5, use_cached=False):
 				'published_date': h['published date'],
 				'title': article.title,
 				'text': article.text,
+				'url': h['url'],
 			}
 			articles.append(article_obj)
 			f.write(json.dumps(article_obj) + '\n')
