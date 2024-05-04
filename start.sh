@@ -1,4 +1,9 @@
-while true                                  INT ✘  12h 6m 52s  five-truths   07:07:09 PM
-do dotenv run python app.py
-sleep 21600
+while true; do
+    current_hour=$(date +%H)
+    
+    if [ $current_hour -ge 7 ] && [ $current_hour -lt 17 ]; then
+			 	dotenv run python app.py
+    fi
+    
+    sleep 10800
 done
