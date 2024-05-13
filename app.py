@@ -4,6 +4,7 @@ import news
 from audio import create_audio, create_audio_text
 from summarizer import get_summaries 
 from discord_client import send_audio
+import classifier
 
 MAX_ARTICLES_TO_REPORT = 5
 
@@ -16,22 +17,28 @@ print('Filtering reported articles...')
 articles = cache.filter_reported_articles(articles)
 print('remaining unreported articles', len(articles))
 
+print('Filtering for narrative articles')
+articles = classifier.filter_for_narrative_articles(articles)
+print('remaining narrative articles', len(articles))
+
+print('Limiting articles to', MAX_ARTICLES_TO_REPORT)
 articles = articles[:MAX_ARTICLES_TO_REPORT]
+print('Remainings articles', len(articles))
 
-if len(articles) == 0:
-	print('No unreported articles')
-	exit()
+# if len(articles) == 0:
+# 	print('No unreported articles')
+# 	exit()
 
-print(f'Generating {len(articles)} summaries...')
-summaries = get_summaries(articles, use_cached=False)
+# print(f'Generating {len(articles)} summaries...')
+# summaries = get_summaries(articles, use_cached=False)
 
-print('Creating audio text...')
-audio_text = create_audio_text(summaries, now)
+# print('Creating audio text...')
+# audio_text = create_audio_text(summaries, now)
 
-print(f'Generating audio from text:\n{audio_text}')
-create_audio(audio_text, filename='audio.mp3', use_cached=False)
+# print(f'Generating audio from text:\n{audio_text}')
+# create_audio(audio_text, filename='audio.mp3', use_cached=False)
 
-send_audio('audio.mp3')
+# send_audio('audio.mp3')
 
 print('Caching reported articles...')
 cache.add_reported_articles(articles)

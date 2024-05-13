@@ -1,3 +1,6 @@
+# deletes any cache
+rm -f /tmp/reported_news_cache.jsonl
+
 while true; do
     current_hour=$(date +%H)
     
